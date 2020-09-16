@@ -8,3 +8,15 @@ before_install:
 
 script:
   - docker run -e CI=true travisci npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-central-1"
+  app: "travisci"
+  env: "Travisci-env"
+  bucket_name: "elasticbeanstalk-eu-central-1-250933953151"
+  bucket_path: "travisci"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
